@@ -89,7 +89,7 @@ def _export2onnx(input_model, output_model, output_model_simple, is_half, metada
     if is_half:
         net_g_onnx = net_g_onnx.half()
     
-    featsLength = 64
+    featsLength = 100
 
     if is_half:
         feats = torch.HalfTensor(1, featsLength, metadata["embChannels"]).to(dev)
@@ -126,11 +126,11 @@ def _export2onnx(input_model, output_model, output_model_simple, is_half, metada
         net_g_onnx,
         inputs,
         output_model,
-        dynamic_axes={
-            "feats": [1],
-            "pitch": [1],
-            "pitchf": [1],
-        },
+        # dynamic_axes={
+        #     "feats": [1],
+        #     "pitch": [1],
+        #     "pitchf": [1],
+        # },
         do_constant_folding=False,
         opset_version=17,
         verbose=False,
